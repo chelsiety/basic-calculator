@@ -1,0 +1,192 @@
+/**
+*
+* base styles and typography
+* ---------------------------
+*/
+:root {
+    --black-100: hsl(0, 0%, 0%);
+
+    --gray-100: hsl(228, 24%, 96%); /*display-screen*/
+    --gray-200: hsl(210, 4%, 91%); /*calculator base or body */
+    --gray-300: hsl(218, 9%, 75%); /*display border? */
+    
+    --blue-100: hsl(187, 30%, 73%);
+    --blue-200: hsl(187, 30%, 45%); /*active, focus  */
+
+    --green-100: hsl(80, 54%, 68%);
+    --green-200: hsl(80, 54%, 45%);
+
+
+}
+
+/**************************
+
+Base styles
+
+***************************/
+
+html {
+    font-size: 150%;
+    font-weight: 300;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+} 
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/**************************
+
+Calculator
+
+***************************/
+
+.calculator {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: var(--gray-200);
+    width: 18rem;
+    height: 24.2rem;
+    padding: 1.5rem;
+    border: 2px solid var(--black-100);
+    border-radius: 10px;
+
+}
+
+.calculator__display {                     /*screen  */
+    background-color: var(--gray-100);
+    border: 2px solid var(--black-100);
+    border-radius: 8px;
+    padding: 1rem 1rem;
+    height: 4.6rem;
+    text-align: right;
+    margin-bottom: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calculator__screen-last{
+    min-height: 0.2rem;
+    font-size: calc(1rem * 1.2);
+}
+
+.calculator__screen-current {
+    min-height: 0.9rem;
+    font-size: calc(1rem * 1.2 * 1.2 * 1.2 * 1.2);;
+}
+
+
+
+.calculator__keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+        ". . . ."
+        "seven eight nine times"
+        "four five six minus"
+        "one two three plus"
+        "zero decimal equal plus";
+    grid-gap: 0.5rem;
+}
+
+.calculator__keys > button {
+    padding: 0.5rem 1rem;
+    font-size: calc(0.8rem * 1.2 * 1.2 * 1.2);
+    border-radius: 5px;
+}
+
+.calculator__keys > button:hover {
+    opacity: 0.85;
+}
+.num {
+    background-color: var(--blue-100);
+}
+.num:active {
+    background-color: var(--blue-200);
+}
+
+.symbol {
+    background-color: var(--green-100);
+}
+
+.symbol:active {
+    background-color: var(--green-200);
+}
+
+.backspace {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zero {
+    grid-area: zero;
+}
+
+.one {
+    grid-area: one;
+}
+
+.two {
+    grid-area: two;
+}
+
+.three {
+    grid-area: three;
+}
+
+.four {
+    grid-area: four;
+}
+
+.five {
+    grid-area: five;
+}
+
+.six {
+    grid-area: six;
+}
+
+.seven {
+    grid-area: seven;
+}
+
+.eight{
+    grid-area: eight;
+}
+
+.nine {
+    grid-area: nine;
+}
+
+.times {
+    grid-area: times;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.decimal {
+    grid-area: decimal;
+}
+
+.equal {
+    grid-area: equal;
+}
+
+
+.material-symbols-rounded {
+    font-size: 1.7rem;
+}
+
+
