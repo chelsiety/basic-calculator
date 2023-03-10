@@ -31,10 +31,13 @@ clearButton.addEventListener('click', () => {
 })
 
 equalButton.addEventListener('click', () => {
-    previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;
-    operate();
-    currentDisplayValue.textContent = currentOperand;
-    currentOperand = '';
+    if (currentOperator === null) return
+    else {
+        previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;
+        operate();
+        currentDisplayValue.textContent = currentOperand;
+        currentOperand = '';
+    }
 })
 
 // innerText
