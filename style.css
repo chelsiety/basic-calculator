@@ -70,7 +70,7 @@ Calculator
     justify-content: space-between;
 }
 
-.calculator__screen-last{
+.calculator__screen-previous{
     min-height: 0.2rem;
     font-size: calc(1rem * 1.2);
 }
@@ -103,10 +103,10 @@ Calculator
 .calculator__keys > button:hover {
     opacity: 0.85;
 }
-.num {
+.number {
     background-color: var(--blue-100);
 }
-.num:active {
+.number:active {
     background-color: var(--blue-200);
 }
 

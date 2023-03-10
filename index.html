@@ -24,31 +24,31 @@
     <div class="container">
         <div class="calculator">
             <div class="calculator__display">
-                <div class="calculator__screen-last" id="last-operation-display-screen">25 + 5 =</div>
-                <div class="calculator__screen-current" id="current-operation-display-screen">30</div>
+                <div class="calculator__screen-previous" id="previous-operation-display-screen"></div>
+                <div class="calculator__screen-current" id="current-operation-display-screen">0</div>
             </div>
             <div class="calculator__keys">
-                <button class="symbol keys clear">AC</button>
-                <button class="symbol keys backspace">
+                <button class="keys symbol clear">AC</button>
+                <button class=" keys symbol backspace">
                     <i class="material-symbols-rounded"> backspace </i>
                 </button>
-                <button class="symbol keys percent">&percnt;</button>
-                <button class="symbol keys divide">&divide;</button>
-                <button class="symbol keys times">&times;</button>
-                <button class="symbol keys minus">&minus;</button>
-                <button class="symbol keys plus">&plus;</button>
-                <button class="symbol keys equal">&equals;</button>
-                <button class="num keys decimal">.</button>
-                <button class="num keys zero">0</button>
-                <button class="num keys one">1</button>
-                <button class="num keys two">2</button>
-                <button class="num keys three">3</button>
-                <button class="num keys four">4</button>
-                <button class="num keys five">5</button>
-                <button class="num keys six">6</button>
-                <button class="num keys seven">7</button>
-                <button class="num keys eight">8</button>
-                <button class="num keys nine">9</button>
+                <button class="keys symbol percent">&percnt;</button>
+                <button data-operator="&divide;" class="keys symbol operator divide">&divide;</button>
+                <button data-operator="&times;" class="keys symbol operator times">&times;</button>
+                <button data-operator="&minus;" class="keys symbol operator minus">&minus;</button>
+                <button data-operator="&plus;" class="keys symbol operator plus">&plus;</button>
+                <button class="keys symbol equal">&equals;</button>
+                <button class="keys number decimal">.</button>
+                <button data-number="0" class="keys number zero">0</button>
+                <button data-number="1" class="keys number one">1</button>
+                <button data-number="2" class="keys number two">2</button>
+                <button data-number="3" class="keys number three">3</button>
+                <button data-number="4" class="keys number four">4</button>
+                <button data-number="5" class="keys number five">5</button>
+                <button data-number="6" class="keys number six">6</button>
+                <button data-number="7" class="keys number seven">7</button>
+                <button data-number="8" class="keys number eight">8</button>
+                <button data-number="9" class="keys number nine">9</button>
              
 <!-- -->
             </div>
