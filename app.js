@@ -44,15 +44,7 @@ decimalButton.addEventListener('click', () => {
     appendDecimal();
 })
 
-function appendDecimal() {
 
-    if (currentDisplayValue.textContent.includes('.')) return;
-    else {
-        currentOperand += '.' 
-    }
-    updateDisplay()
-
-}
 
 // innerText
 //textContent
@@ -120,13 +112,13 @@ function operate() {
 
 }
 
-
-// currentOperand = 8
-// currentoperator = null
-// previousOpereand = ''
-/*
-
- */
+function appendDecimal() {
+    if (currentDisplayValue.textContent.includes('.')) return;
+    else {
+        currentOperand += '.' 
+    }
+    updateDisplay()
+}
 
 function updateDisplay() {
     currentDisplayValue.textContent = currentOperand;
