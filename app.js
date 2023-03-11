@@ -42,8 +42,10 @@ equalButton.addEventListener('click', () => {
 
 decimalButton.addEventListener('click', () => {
     appendDecimal();
+    updateDisplay();
 })
 
+//percentButton.addEventListener('click', )
 
 
 // innerText
@@ -117,7 +119,7 @@ function appendDecimal() {
     else {
         currentOperand += '.' 
     }
-    updateDisplay()
+    //updateDisplay()
 }
 
 function updateDisplay() {
