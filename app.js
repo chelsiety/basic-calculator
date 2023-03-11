@@ -45,9 +45,15 @@ decimalButton.addEventListener('click', () => {
     updateDisplay();
 })
 
-//percentButton.addEventListener('click', )
+percentButton.addEventListener('click', () => {
+    convertPercentToDecimal();
+        updateDisplay();
+})
 
-
+function convertPercentToDecimal() {
+    currentOperand = parseFloat(currentOperand)/100
+    console.log(console.log(currentOperand))
+}
 // innerText
 //textContent
 // max 12 digits
