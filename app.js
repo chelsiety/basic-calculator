@@ -52,7 +52,6 @@ percentButton.addEventListener('click', () => {
 
 function convertPercentToDecimal() {
     currentOperand = parseFloat(currentOperand)/100
-    console.log(console.log(currentOperand))
 }
 // innerText
 //textContent
@@ -85,6 +84,18 @@ function appendOperator(operator) {
     previousOperand = currentOperand;
     currentOperand = '';
 }
+
+function appendDecimal() {
+    if (currentDisplayValue.textContent.includes('.')) return;
+    else if (currentDisplayValue.textContent === '0' || currentDisplayValue.textContent === '') {
+        currentOperand = 0;    
+        currentOperand += '.';
+    }
+    else {
+        currentOperand += '.' 
+    }
+}
+
 
 function operate() {
 
@@ -120,13 +131,6 @@ function operate() {
 
 }
 
-function appendDecimal() {
-    if (currentDisplayValue.textContent.includes('.')) return;
-    else {
-        currentOperand += '.' 
-    }
-    //updateDisplay()
-}
 
 function updateDisplay() {
     currentDisplayValue.textContent = currentOperand;
