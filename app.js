@@ -40,31 +40,40 @@ equalButton.addEventListener('click', () => {
     }
 })
 
+decimalButton.addEventListener('click', () => {
+    appendDecimal();
+})
+
+function appendDecimal() {
+
+    if (currentDisplayValue.textContent.includes('.')) return;
+    else {
+        currentOperand += '.' 
+    }
+    updateDisplay()
+
+}
+
 // innerText
 //textContent
 // max 12 digits
+/*
+    console.log(previousOperand)
+    console.log(currentOperator)
+    console.log(currentOperand)
+*/
 let previousOperand = '' 
 let currentOperand = '0'
 let currentOperator = null;
 
 
-// "5"
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
         currentOperand = number
-       // currentDisplayValue.textContent = number;
     } else {
         currentOperand += number
-      //  currentDisplayValue.textContent += number;
     }
 }
-    
-
-/* 
-    previousOperand = '' 
-    currentOperand = '0'
-    currentOperator = null;
-*/
 
 function appendOperator(operator) {
 
@@ -111,19 +120,11 @@ function operate() {
 
 }
 
-// 5 + 3 = 
-// 8
 
 // currentOperand = 8
 // currentoperator = null
 // previousOpereand = ''
 /*
-
-
-equalButton.addEventListener('click', () => {
-    operate();
-    updateDisplay();
-})
 
  */
 
@@ -134,14 +135,8 @@ function updateDisplay() {
          previousDisplayValue.textContent = ''
     }
     else if (currentOperator !== null) {
-        previousDisplayValue.textContent = `${previousOperand} ${currentOperator}`;
-        
-        
-    } //else {
-        //previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand}`;
-        // currentoperator = null  
-    //currentDisplayValue.textContent = `${currentOperand}`
-   // }
+        previousDisplayValue.textContent = `${previousOperand} ${currentOperator}`;   
+    }
 }
 
 
