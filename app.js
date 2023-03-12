@@ -27,7 +27,6 @@ operatorButtons.forEach(button =>
 
 clearButton.addEventListener('click', () => {
     clearCalculator();
-    updateDisplay();
 })
 
 equalButton.addEventListener('click', () => {
@@ -64,12 +63,12 @@ function convertPercentToDecimal() {
 let previousOperand = '' 
 let currentOperand = '0'
 let currentOperator = null;
-
+const maxDisplayCharacterLength = 12
 
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
         currentOperand = number
-    } else {
+    } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {
         currentOperand += number
     }
 }
@@ -133,8 +132,13 @@ function operate() {
 
 
 function updateDisplay() {
-    currentDisplayValue.textContent = currentOperand;
-
+    
+    currentDisplayValue.textContent = currentOperand   
+    
+    if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {
+        currentDisplayValue.textContent = currentOperand        
+    }
+    
     if (currentOperator === null) {
          previousDisplayValue.textContent = ''
     }
@@ -148,6 +152,9 @@ function clearCalculator() {
     previousOperand = '' 
     currentOperand = '0'
     currentOperator = null;
+
+    previousDisplayValue.textContent = ''
+    currentDisplayValue.textContent = currentOperand;
 }
 
 
