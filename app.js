@@ -1,4 +1,3 @@
-
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operator]');
 const equalButton = document.querySelector('.equal');
@@ -19,7 +18,7 @@ const maxDecimalPlaces = 6;
 
 numberButtons.forEach(button =>
     button.addEventListener('click', event => {
-        const numberClicked = event.target.dataset.number; // "5"
+        const numberClicked = event.target.dataset.number;
         appendNumber(numberClicked);
         updateDisplay();
 }));
@@ -40,9 +39,15 @@ equalButton.addEventListener('click', () => {
     else {
         previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;
         operate();
-        roundOffComputedValue(currentOperand);
-        currentDisplayValue.textContent = currentOperand;
-        currentOperand = '';
+        if (currentOperand !== undefined) {
+            roundOffComputedValue(currentOperand);
+            currentDisplayValue.textContent = currentOperand;
+            currentOperand = '';
+        }
+        else {
+              currentOperand = 0;
+        }
+       
     }
 })
 
@@ -72,7 +77,7 @@ function convertPercentToDecimal() {
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
         currentOperand = number;
-    } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {  //     // Prevent screen overflow by using maxDisplayCharacterLength as a limit
+    } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {  // Prevent screen overflow by using maxDisplayCharacterLength as a limit
         currentOperand += number;
     }
 }
@@ -81,7 +86,12 @@ function appendOperator(operator) {
     if (currentOperand === '') return;
     else if (previousOperand !== '') {
         operate();
-        roundOffComputedValue(currentOperand);
+        if (currentOperand !== undefined) { 
+            roundOffComputedValue(currentOperand);
+        }
+        else {
+            return clearCalculator();  // Clears calculator if currentOperand is undefined (when a user attempts to divide by zero)
+        }
     }
     currentOperator = operator;
     previousOperand = currentOperand;
@@ -116,10 +126,10 @@ function operate() {
             computedValue = previousNum * currentNum;
             break;
         case '÷':
-            if (currentNum === 0) {
-                // currentDisplayValue.textContent = 'Cannot divide by zero'
-                alert('Cannot divide by zero')
-                return
+            if (currentNum === 0) {  // If user attempts to divide by zero, set computedValue to undefined, give an alert, and clear calculator
+                computedValue = undefined;
+                alert('Cannot divide by zero');
+                clearCalculator();
             } else {
                 computedValue = previousNum / currentNum;
             }
