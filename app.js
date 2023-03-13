@@ -10,7 +10,6 @@ const previousDisplayValue = document.querySelector('#previous-operation-display
 const currentDisplayValue = document.querySelector('#current-operation-display-screen');
 
 
-
 let previousOperand = ''; 
 let currentOperand = '0';
 let currentOperator = null;
@@ -18,33 +17,27 @@ const maxDisplayCharacterLength = 12;
 const maxDecimalPlaces = 6;
 
 
-
-
 numberButtons.forEach(button =>
     button.addEventListener('click', event => {
         const numberClicked = event.target.dataset.number; // "5"
         appendNumber(numberClicked);
-        updateDisplay()
+        updateDisplay();
 }));
 
 operatorButtons.forEach(button =>
     button.addEventListener('click', event => {
         const operatorClicked = event.target.dataset.operator;
         appendOperator(operatorClicked);
-        updateDisplay()
-
-}));
+        updateDisplay();
+}))
 
 clearButton.addEventListener('click', () => {
     clearCalculator();
 })
 
 equalButton.addEventListener('click', () => {
-    if (currentOperator === null || currentOperand.length === 0) return
+    if (currentOperator === null || currentOperand.length === 0) return;
     else {
-        console.log(previousOperand)
-        console.log(currentOperator)
-        console.log(currentOperand)
         previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;
         operate();
         roundOffComputedValue(currentOperand);
@@ -73,20 +66,19 @@ backspaceButton.addEventListener('click', () => {
 })
 
 function convertPercentToDecimal() {
-    currentOperand = parseFloat(currentOperand)/100
+    currentOperand = parseFloat(currentOperand) / 100;
 }
 
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
-        currentOperand = number
-    } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {
-        currentOperand += number
+        currentOperand = number;
+    } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {  //     // Prevent screen overflow by using maxDisplayCharacterLength as a limit
+        currentOperand += number;
     }
 }
 
 function appendOperator(operator) {
-
-    if (currentOperand === '') return
+    if (currentOperand === '') return;
     else if (previousOperand !== '') {
         operate();
         roundOffComputedValue(currentOperand);
@@ -103,13 +95,12 @@ function appendDecimal() {
         currentOperand += '.';
     }
     else {
-        currentOperand += '.' 
+        currentOperand += '.'; 
     }
 }
 
 
 function operate() {
-
     let computedValue;
     const currentNum = parseFloat(currentOperand);
     const previousNum = parseFloat(previousOperand);
@@ -139,20 +130,18 @@ function operate() {
     currentOperand = computedValue;
     currentOperator = null;
     previousOperand = '';
-
 }
 
 
 function updateDisplay() {
+    currentDisplayValue.textContent = currentOperand;
     
-    currentDisplayValue.textContent = currentOperand   
-    
-    if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {
-        currentDisplayValue.textContent = currentOperand        
+    if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {  //     // Prevent screen overflow by using maxDisplayCharacterLength as a limit
+        currentDisplayValue.textContent = currentOperand;        
     }
     
     if (currentOperator === null) {
-         previousDisplayValue.textContent = ''
+        previousDisplayValue.textContent = '';
     }
     else if (currentOperator !== null) {
         previousDisplayValue.textContent = `${previousOperand} ${currentOperator}`;   
@@ -161,25 +150,13 @@ function updateDisplay() {
 
 
 function clearCalculator() {
-    previousOperand = '' 
-    currentOperand = '0'
+    previousOperand = '';
+    currentOperand = '0';
     currentOperator = null;
 
-    previousDisplayValue.textContent = ''
+    previousDisplayValue.textContent = '';
     currentDisplayValue.textContent = currentOperand;
 }
-
-
-
-
-
-/*
-TESTING
-
-const computedValue = 1285903715
-const maxDecimalPlaces = 6
-const maxDisplayCharacterLength = 12
-*/
 
 function roundOffAccurately(num, decimalPlaces) {
     let roundedValue = parseFloat(Math.round (num +'e'+ decimalPlaces) +'e-'+ decimalPlaces);
@@ -188,17 +165,11 @@ function roundOffAccurately(num, decimalPlaces) {
 }
 
 function convertToExponentialNotation(num, decimalPlaces) {
-    let roundedValue = num.toExponential(decimalPlaces)
+    let roundedValue = num.toExponential(decimalPlaces);
     currentOperand = roundedValue;
     return currentOperand;
 }
 
-console.log(`computed value: ${currentOperand}`)
-console.log(`computed value string length: ${currentOperand.toString().length}`)
-
-
-
-// 
 function roundOffComputedValue(num) {
     /* Function that rounds off the computed value based on whether the value is an integer or a decimal number
         - Round off values to prevent screen overflow of the calculator when computed number is too big
@@ -217,7 +188,7 @@ function roundOffComputedValue(num) {
      // Check if computed value is written in exponential notation 
     if (num.toString().includes('e')) {
         // Limit the decimal places of the number in exponential notation
-        return convertToExponentialNotation(num, maxDecimalPlaces)
+        return convertToExponentialNotation(num, maxDecimalPlaces);
     }
     
     // Check if number is a float (decimal) or integer
@@ -226,11 +197,9 @@ function roundOffComputedValue(num) {
     if (Number.isInteger(num)) {
         // Check if integer has less than or equal to 12 characters
         if (num.toString().length <= maxDisplayCharacterLength) {
-            console.log('integer, <= 12, roundOffAccurately')
-            return roundOffAccurately(num, maxDecimalPlaces)
+            return roundOffAccurately(num, maxDecimalPlaces);
         } else { 
-            console.log('integer, >12, convertToExponentialNotation')
-            return convertToExponentialNotation(num, maxDecimalPlaces)
+            return convertToExponentialNotation(num, maxDecimalPlaces);
         }
     }
     // Check if  number is a float or decimal
@@ -238,19 +207,14 @@ function roundOffComputedValue(num) {
         
         // Get the numbers before the decimal point
         let splitNumArray = num.toString().split('.');
-        let beforeDecimalNum = splitNumArray[0]
+        let beforeDecimalNum = splitNumArray[0];
         
         // Check if the number of digits before the decimal point is less than or equal to 6
         if (beforeDecimalNum.length <= maxDecimalPlaces) {
-            console.log('decimal, <=6, roundOffAccurately')
-            return roundOffAccurately(num, maxDecimalPlaces)
+            return roundOffAccurately(num, maxDecimalPlaces);
         }
         else {
-           console.log('decimal, >6, convertToExponentialNotation')
-           return convertToExponentialNotation(num, maxDecimalPlaces)
+            return convertToExponentialNotation(num, maxDecimalPlaces);
         }
     }
 }
-console.log('----------------------')
-console.log('Result: ')
-console.log(roundOffComputedValue(currentOperand))
