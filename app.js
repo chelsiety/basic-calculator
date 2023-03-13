@@ -10,6 +10,16 @@ const previousDisplayValue = document.querySelector('#previous-operation-display
 const currentDisplayValue = document.querySelector('#current-operation-display-screen');
 
 
+
+let previousOperand = ''; 
+let currentOperand = '0';
+let currentOperator = null;
+const maxDisplayCharacterLength = 12;
+const maxDecimalPlaces = 6;
+
+
+
+
 numberButtons.forEach(button =>
     button.addEventListener('click', event => {
         const numberClicked = event.target.dataset.number; // "5"
@@ -30,8 +40,11 @@ clearButton.addEventListener('click', () => {
 })
 
 equalButton.addEventListener('click', () => {
-    if (currentOperator === null) return
+    if (currentOperator === null || currentOperand.length === 0) return
     else {
+        console.log(previousOperand)
+        console.log(currentOperator)
+        console.log(currentOperand)
         previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;
         operate();
         roundOffComputedValue(currentOperand);
@@ -46,27 +59,22 @@ decimalButton.addEventListener('click', () => {
 })
 
 percentButton.addEventListener('click', () => {
+    if (currentOperand.length === 0) return;
     convertPercentToDecimal();
-        updateDisplay();
+    updateDisplay();
+})
+
+backspaceButton.addEventListener('click', () => {
+        currentOperand = currentDisplayValue.textContent.slice(0, -1);
+        currentDisplayValue.textContent = currentOperand;
+        if (currentOperand.length === 0) {
+            currentDisplayValue.textContent = 0;
+        }
 })
 
 function convertPercentToDecimal() {
     currentOperand = parseFloat(currentOperand)/100
 }
-// innerText
-//textContent
-// max 12 digits
-/*
-    console.log(previousOperand)
-    console.log(currentOperator)
-    console.log(currentOperand)
-*/
-let previousOperand = ''; 
-let currentOperand = '0';
-let currentOperator = null;
-const maxDisplayCharacterLength = 12;
-const maxDecimalPlaces = 6;
-
 
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
