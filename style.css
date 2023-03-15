@@ -77,7 +77,7 @@ Calculator
 
 .calculator__screen-current {
     min-height: 0.9rem;
-    font-size: calc(1rem * 1.2 * 1.2 * 1.2 * 1.2);;
+    font-size: calc(1rem * 1.2 * 1.2 * 1.2 * 1.2);
 }
 
 
