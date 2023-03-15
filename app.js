@@ -43,7 +43,7 @@ equalButton.addEventListener('click', () => {
     else {
         previousDisplayValue.textContent = `${previousOperand} ${currentOperator} ${currentOperand} =`;    // Update smaller display text (previously clicked values)  Ex. 5 + 10 =
         operate();
-        if (currentOperand !== undefined) {
+        if (currentOperand !== undefined) { // Round off the currentOperand (computedValue) if currentOperand is NOT undefined. CurrentOperand becomes undefined when a user attempts to divide by zero
             roundOffComputedValue(currentOperand);
             currentDisplayValue.textContent = currentOperand;    // Update bigger display text to show currentOperand (computedValue)
             currentOperand = '';                                 // Reset currentOperand value 
