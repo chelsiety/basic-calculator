@@ -51,7 +51,6 @@ equalButton.addEventListener('click', () => {
         else {
               currentOperand = 0;
         }
-       
     }
 })
 
@@ -70,7 +69,7 @@ backspaceButton.addEventListener('click', () => {
         currentOperand = currentDisplayValue.textContent.slice(0, -1);  // Deletes the last number from the currentOperand
         currentDisplayValue.textContent = currentOperand;               // Update display after deleting the last number from currentOperand
         if (currentOperand.length === 0) {
-            currentDisplayValue.textContent = 0;                        // Display 0 when all the numbers from the currentOperand is deleted
+            currentDisplayValue.textContent = 0;                        // Display 0 when all the numbers from the currentOperand is deleted (currentOperand string length is 0)
         }
 })
 
@@ -80,17 +79,17 @@ function convertPercentToDecimal() {
 
 function appendNumber(number) {
     if (currentDisplayValue.textContent === '0') {
-        currentOperand = number;  // Changes the zero in the currentDisplay to the current number clicked or pressed
+        currentOperand = number;  // Changes the zero in the currentDisplay to the current number that was clicked or pressed
     } else if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {  // Prevent screen overflow by using maxDisplayCharacterLength as a limit
         currentOperand += number;  // Adds currently pressed number to currentOperand string
     }
 }
 
 function appendOperator(operator) {
-    if (currentOperand === '') return;   
-    else if (previousOperand !== '') {
+    if (currentOperand === '') return;   // Stops proceeding with the calculation (operate function) without a currentOperand number clicked/pressed.
+    else if (previousOperand !== '') {   // Proceeds with the calculation when the previousOperand is updated with a value (previousOperand gets the currentOperand value, previousOperand = currentOperand)
         operate();
-        if (currentOperand !== undefined) { // Round off the currentOperand (computedValue) if currentOperand is NOT undefined
+        if (currentOperand !== undefined) {   // Rounds off the currentOperand (computedValue) if currentOperand is NOT undefined. Round off if the divisor is NOT 0.
             roundOffComputedValue(currentOperand);
         }
         else {
@@ -115,7 +114,7 @@ function appendDecimal() {
 }
 
 
-function operate() {
+function operate() { // Calculates the computedValue based on the operator pressed/selected
     let computedValue;
     const currentNum = parseFloat(currentOperand);
     const previousNum = parseFloat(previousOperand);
@@ -143,26 +142,24 @@ function operate() {
             return null;
     }
     // Update operand and operator values
-    currentOperand = computedValue;
+    currentOperand = computedValue;  //  currentOperand gets the updated with the computedValue
     currentOperator = null;
     previousOperand = '';
 }
 
 
 function updateDisplay() {
-
     // Display currentOperand value
     currentDisplayValue.textContent = currentOperand;
     
     if (currentDisplayValue.textContent.length < maxDisplayCharacterLength) {   // Prevent screen overflow by using maxDisplayCharacterLength as a limit
         currentDisplayValue.textContent = currentOperand;        
     }
-    
-    if (currentOperator === null) {
+    if (currentOperator === null) {    // Display nothing on the smaller display if no operator is pressed/selected
         previousDisplayValue.textContent = '';
     }
-    else if (currentOperator !== null) {
-        previousDisplayValue.textContent = `${previousOperand} ${currentOperator}`;   // Update smaller display text (previously clicked values)  Ex. 5 + 
+    else if (currentOperator !== null) {   // Update smaller display text (previously clicked values) if currentOperator is pressed/selected Ex. 5 + 
+        previousDisplayValue.textContent = `${previousOperand} ${currentOperator}`;  
     }
 }
 
@@ -172,7 +169,6 @@ function clearCalculator() {
     previousOperand = '';
     currentOperand = '0';
     currentOperator = null;
-    
     // Display 0 in currentDisplayValue
     previousDisplayValue.textContent = '';
     currentDisplayValue.textContent = currentOperand;
@@ -222,12 +218,11 @@ function roundOffComputedValue(num) {
             return convertToExponentialNotation(num, maxDecimalPlaces);
         }
     }
-    // Check if  number is a float or decimal
+    // Check if  number is a float or decimal (Check if the number is NOT an integer) Ex. 51829.371
     if (!Number.isInteger(num)) {
-        
-        // Get the numbers before the decimal point
-        let splitNumArray = num.toString().split('.');
-        let beforeDecimalNum = splitNumArray[0];
+        // Get the numbers before the decimal point 
+        let splitNumArray = num.toString().split('.');   // Ex. [ '51829', '371' ]
+        let beforeDecimalNum = splitNumArray[0];  // Ex. 51829
         
         // Check if the number of digits before the decimal point is less than or equal to 6
         if (beforeDecimalNum.length <= maxDecimalPlaces) {
@@ -238,7 +233,6 @@ function roundOffComputedValue(num) {
         }
     }
 }
-
 
 function supportKeyBoardInput(event) {
     const key = event.key;   // the value of the key pressed by the user
@@ -268,7 +262,6 @@ function supportKeyBoardInput(event) {
     else if (key === 'Backspace')
         backspaceButton.click(); 
 }
-
 
 function convertToOperatorSymbol(keyBoardOperator) { 
     // Convert the event.key values to operator symbols (÷, ×, −, +) used in the const currentOperator variable, operate function, etc  
