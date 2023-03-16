@@ -29,7 +29,7 @@ numberButtons.forEach(button =>
 
 operatorButtons.forEach(button =>
     button.addEventListener('click', event => {
-        const operatorClicked = event.target.dataset.operator;  // Get the vale from data-operator attribute in the html file
+        const operatorClicked = event.target.dataset.operator;  // Get the value from data-operator attribute in the html file
         appendOperator(operatorClicked);
         updateDisplay();
 }))
@@ -169,6 +169,7 @@ function clearCalculator() {
     previousOperand = '';
     currentOperand = '0';
     currentOperator = null;
+
     // Display 0 in currentDisplayValue
     previousDisplayValue.textContent = '';
     currentDisplayValue.textContent = currentOperand;
@@ -264,7 +265,7 @@ function supportKeyBoardInput(event) {
 }
 
 function convertToOperatorSymbol(keyBoardOperator) { 
-    // Convert the event.key values to operator symbols (÷, ×, −, +) used in the const currentOperator variable, operate function, etc  
+    // Convert the event.key values to operator symbols (÷, ×, −, +) used in the currentOperator variable, operate function, etc  
     switch (keyBoardOperator) {
         case '/':
             return '÷';
